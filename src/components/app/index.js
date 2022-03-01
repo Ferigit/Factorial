@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { factorial } from '../../utils';
 import styles from './app.module.css'
+import worker_script from "./worker.js";
+
+var worker;
 
 const App = () => {
     // States
@@ -20,6 +23,19 @@ const App = () => {
         }
     }
 
+    useEffect(() => {
+        worker = new Worker(worker_script);
+        worker.postMessage({ number });
+        worker.onerror = (err) => err;
+        worker.onmessage = (e) => {
+            const { factNum } = e.data;
+            console.log("worker result: ", factNum);
+            // const resultDiv = document.createElement("div");
+            // resultDiv.innerHTML = textCont(num, fibNum, time);
+            // resultDiv.className = "result-div";
+            // resultsContainer.appendChild(resultDiv);
+        };
+    }, [number])
     return (
         <div>
             <h2 className={styles.appTitle}>
