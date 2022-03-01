@@ -5,7 +5,7 @@ export function factorial(userInt) {
     if (!userInt)
         return ''
 
-    var i, nextNumber, carret,
+    let i, nextNumber, carret,
 
         result = userInt.toString().split('').reverse().map(Number)
 

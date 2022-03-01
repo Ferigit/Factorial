@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { factorial } from '../../utils';
-import styles from './styles.module.css'
+import styles from './app.module.css'
 
 const App = () => {
     // States
@@ -9,10 +9,14 @@ const App = () => {
 
     // Callbacks
     const addNumberList = () => {
-        const numberToAdd = +number
-        if (Number.isFinite(numberToAdd)) {
-            setNumberList([...numberList, numberToAdd])
-            setNumber('');
+        if (number < 0) {
+            alert("Please Enter a positive number")
+        } else {
+            const numberToAdd = +number
+            if (Number.isFinite(numberToAdd)) {
+                setNumberList([...numberList, numberToAdd])
+                setNumber('');
+            }
         }
     }
 
@@ -28,7 +32,7 @@ const App = () => {
                 type="number"
                 name="number"
                 value={number}
-                onChange={(event) => setNumber(event.target.value.slice(0, 5))}
+                onChange={(event) => setNumber(event.target.value.slice(0, 4))}
             />
             <br />
             <button onClick={addNumberList}>Add For Calculation</button>
